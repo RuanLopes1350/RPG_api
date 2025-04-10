@@ -5,8 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "dev": "nodemon src/index.ts",
-    "dev2": "tsx watch src/index.ts",
+    "dev": "tsx watch src/index.ts",
     "start": "node dist/index.js",
     "build": "tsc"
   },
@@ -17,6 +16,12 @@
     "@types/sqlite3": "^5.1.0",
     "express": "^5.1.0",
     "sqlite3": "^5.1.7",
-    "ts-node": "^10.9.2"
+    "tsx": "^4.19.3"
+  },
+  "devDependencies": {
+    "@types/node": "^22.14.0",
+    "nodemon": "^3.1.9",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
   }
 }
