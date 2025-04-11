@@ -15,6 +15,7 @@
   "dependencies": {
     "@types/sqlite3": "^5.1.0",
     "express": "^5.1.0",
+    "nanoid": "^5.1.5",
     "sqlite3": "^5.1.7",
     "tsx": "^4.19.3"
   },
