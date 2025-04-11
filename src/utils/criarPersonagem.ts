@@ -3,6 +3,7 @@ import { Classes } from "../enum/classe";
 import { Racas } from "../enum/raca";
 import { Generos } from "../enum/genero";
 import { personagens } from "../database/personagens";
+import { personagemSchema } from "../validation/validarPersonagem";
 
 export function criarPersonagem(
     id:number,
@@ -30,4 +31,12 @@ export function criarPersonagem(
     if (personagemExistente) {
         throw new Error("Personagem já existe");
     }
+
+    const validar = personagemSchema.safeParse(novoPersonagem);
+    if (!validar.success){
+        console.log(validar.error.format());
+        throw new Error("Erro ao validar personagem");
+    }
+
+    return console.log(novoPersonagem)
 }

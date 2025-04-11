@@ -6,6 +6,7 @@
   "type": "module",
   "scripts": {
     "dev": "tsx watch src/index.ts",
+    "server": "tsx watch src/api/index.ts",
     "start": "node dist/index.js",
     "build": "tsc"
   },
@@ -13,11 +14,14 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/express": "^5.0.1",
     "@types/sqlite3": "^5.1.0",
+    "dotenv": "^16.5.0",
     "express": "^5.1.0",
     "nanoid": "^5.1.5",
     "sqlite3": "^5.1.7",
-    "tsx": "^4.19.3"
+    "tsx": "^4.19.3",
+    "zod": "^3.24.2"
   },
   "devDependencies": {
     "@types/node": "^22.14.0",
