@@ -4,6 +4,9 @@ import { customAlphabet, nanoid } from "nanoid";
 import { criarPersonagem } from "./utils/criarPersonagem";
 import { Racas } from "./enum/raca";
 import { Classes } from "./enum/classe";
+import sqlite3, { Database } from "sqlite3";
+
+export const db = new sqlite3.Database('.data/RPG-Banco.db');
 
 const customNanoid = customAlphabet("1234567890", 8)
 
