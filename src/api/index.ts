@@ -2,6 +2,7 @@ import express from 'express';
 import { jogadores } from '../database/jogadores';
 import { customAlphabet, nanoid } from "nanoid";
 import { Jogador } from '../interface/jogador';
+import { cadastrarJogadorSQL } from '../database/cadastrarJogadorSQL';
 const customNanoid = customAlphabet("1234567890", 8)
 
 const app = express();
@@ -13,6 +14,7 @@ app.listen(PORT, () => {
 })
 
 app.get('/', (req, res) => {
+    console.log(req.socket.remoteAddress || null, req.method);
     res.send('Olá Mundo!');
 })
 
@@ -22,6 +24,7 @@ app.get('/jogadores', (req, res) => {
 })
 
 app.post('/jogadores', (req, res) => {
+    console.log(req.socket.remoteAddress || null, req.method, req.body);
     const { nome, idade, genero, email, senha } = req.body;
 
     const novoJogador:Jogador = {
@@ -35,8 +38,14 @@ app.post('/jogadores', (req, res) => {
         personagens: [],
     }
 
-    console.log(req.socket.remoteAddress || null, req.method, req.body);
-
-    jogadores.push(novoJogador);
+    cadastrarJogadorSQL(
+        novoJogador.id,
+        novoJogador.nome,
+        novoJogador.idade,
+        novoJogador.genero,
+        novoJogador.email,
+        novoJogador.senha,
+        novoJogador.dataCadastro
+    )
     res.status(201).json(novoJogador);
 })
