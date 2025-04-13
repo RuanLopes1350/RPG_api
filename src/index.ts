@@ -5,7 +5,7 @@ import { criarPersonagem } from "./utils/criarPersonagem";
 import { Racas } from "./enum/raca";
 import { Classes } from "./enum/classe";
 import sqlite3, { Database } from "sqlite3";
-import { criarTabelaJogadores, criarTabelaPersonagens } from "./database/criarTabelas";
+import { criarTabelaJogadores, criarTabelaPersonagens } from "./database/jogadores/criarTabelas";
 import * as fs from 'fs';
 
 const directory = './data';

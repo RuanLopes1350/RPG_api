@@ -1,4 +1,4 @@
-import { db } from "..";
+import { db } from "../..";
 
 export async function criarTabelaJogadores(): Promise<void> {
   const query = `

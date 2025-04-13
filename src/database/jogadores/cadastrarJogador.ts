@@ -1,4 +1,4 @@
-import { db } from "..";
+import { db } from "../..";
 
 export async function cadastrarJogadorSQL(
     id: number,
@@ -7,8 +7,17 @@ export async function cadastrarJogadorSQL(
     genero: string,
     email: string,
     senha: string,
-    dataCadastro: Date
+    dataCadastro: string
 ) {
+    const jogador = {
+        id : id,
+        nome : nome,
+        idade : idade,
+        genero : genero,
+        email : email,
+        senha : senha,
+        dataCadastro : dataCadastro
+    }
     const query = `
         INSERT INTO jogadores (id, nome, idade, genero, email, senha, dataCadastro)
         VALUES (?, ?, ?, ?, ?, ?, ?);
@@ -24,10 +33,10 @@ export async function cadastrarJogadorSQL(
                     reject(err);
                 } else {
                     console.log("Jogador cadastrado com sucesso!");
-                    resolve(this.lastID);
+                    resolve(jogador);
                 }
             }
         );
     }
     );
- }
+}
