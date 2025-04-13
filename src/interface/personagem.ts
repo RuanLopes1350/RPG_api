@@ -9,6 +9,6 @@ export interface Personagem {
     idade: number,
     level: number,
     classe: Classes,
-    genenro: Generos,
+    genero: Generos,
     jogadorId: number,
 }
