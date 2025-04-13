@@ -8,5 +8,5 @@ export interface Jogador {
     email: string,
     senha: string,
     personagens?: number[],
-    dataCadastro: Date,
+    dataCadastro: string,
 }
