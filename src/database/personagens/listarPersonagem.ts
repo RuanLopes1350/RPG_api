@@ -2,7 +2,9 @@ import { db } from "../..";
 
 export async function listarTodosPersonagens() {
     const query = `
-        SELECT * FROM personagens;
+        SELECT * FROM personagens as P
+        INNER JOIN jogadores as J
+        ON P.idJogador = J.id;
     `;
 
     return new Promise((resolve, reject) => {

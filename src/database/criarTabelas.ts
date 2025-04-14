@@ -1,9 +1,9 @@
-import { db } from "../..";
+import { db } from "../";
 
 export async function criarTabelaJogadores(): Promise<void> {
   const query = `
     CREATE TABLE IF NOT EXISTS jogadores (
-      id INTEGER PRIMARY KEY,
+      id TEXT PRIMARY KEY,
       nome TEXT NOT NULL,
       idade INTEGER NOT NULL,
       genero TEXT NOT NULL,
@@ -30,13 +30,15 @@ export async function criarTabelaJogadores(): Promise<void> {
 export async function criarTabelaPersonagens(): Promise<void> {
   const query = `
     CREATE TABLE IF NOT EXISTS personagens (
-      id INTEGER PRIMARY KEY,
+      id TEXT PRIMARY KEY,
       nome TEXT NOT NULL,
       raca TEXT NOT NULL,
       idade INTEGER NOT NULL,
       level INTEGER NOT NULL,
       classe TEXT NOT NULL,
-      genero TEXT NOT NULL
+      genero TEXT NOT NULL,
+      idJogador INTEGER NOT NULL,
+      dataCadastro TEXT NOT NULL
     )
   `;
 

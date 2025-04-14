@@ -2,6 +2,20 @@ import { db } from "../..";
 import { Generos } from "../../enum/genero";
 
 export async function editarJogadorNOME(id: number, nome: string, idade: number, genero: Generos, email: string, senha: string) {
+
+    const localizarJogador = `
+        SELECT * FROM jogadores WHERE nome = ?;
+    `;
+
+    const usuario = await new Promise((resolve, reject) => {
+        db.get(localizarJogador, [nome], (erro, linhas) => {
+            if(erro){
+                console.log(`Erro ao localizar usuario: ${erro}`);
+                reject(erro);
+            } else {}
+        })
+    })
+
     const query = `
         UPDATE jogadores SET nome = ?, idade = ?, genero = ?, email = ?, senha = ? WHERE id = ?;
     `;

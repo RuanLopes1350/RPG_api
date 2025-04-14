@@ -5,7 +5,7 @@ import { criarPersonagem } from "./utils/criarPersonagem";
 import { Racas } from "./enum/raca";
 import { Classes } from "./enum/classe";
 import sqlite3, { Database } from "sqlite3";
-import { criarTabelaJogadores, criarTabelaPersonagens } from "./database/jogadores/criarTabelas";
+import { criarTabelaJogadores, criarTabelaPersonagens } from "./database/criarTabelas";
 import * as fs from 'fs';
 
 const directory = './data';
@@ -24,7 +24,6 @@ const customNanoid = customAlphabet("1234567890", 8)
 //     Generos.masculino,
 //     'ruan.lopes@email.com',
 //     'Senha123@',
-//     new Date('2025-04-10t18:16:00'),
 // )
 
 // criarPersonagem(
@@ -35,7 +34,6 @@ const customNanoid = customAlphabet("1234567890", 8)
 //     40,
 //     Classes.arqueiro,
 //     Generos.feminino,
-//     1,
 // )
 
 // criarTabelaJogadores();

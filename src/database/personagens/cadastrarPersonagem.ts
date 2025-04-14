@@ -1,13 +1,17 @@
+import { error } from "console";
 import { db } from "../..";
+import { Jogador } from "../../interface/jogador";
 
 export async function CadastrarPersonagem(
-    id: number,
+    id: string,
     nome: number,
     raca: string,
     idade: number,
     level: number,
     classe: string,
     genero: string) {
+
+    let dataCadastro = new Date().toLocaleString();
 
     const personagem = {
         id: id,
@@ -16,7 +20,8 @@ export async function CadastrarPersonagem(
         idade: idade,
         level: level,
         classe: classe,
-        genero: genero
+        genero: genero,
+        dataCadastro: dataCadastro
     }
 
     const query = `

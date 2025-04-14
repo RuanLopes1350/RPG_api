@@ -5,8 +5,15 @@ import { cadastrarJogadorSQL } from '../database/jogadores/cadastrarJogador';
 import { listarTodosJogadores } from '../database/jogadores/listarJogadores';
 import { listarTodosPersonagens } from '../database/personagens/listarPersonagem';
 import { CadastrarPersonagem } from '../database/personagens/cadastrarPersonagem';
+import { deletarJogadorNOME } from '../database/jogadores/deletarJogadorNome';
 
 const customNanoid = customAlphabet("1234567890", 8)
+
+function idPersonalizado(nome:string){
+    const nomeToID = nome[0].toLowerCase().replace(/\s+/g, '');
+    const id = nanoid(8);
+    return `${nomeToID}_${id}`;
+}
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -30,22 +37,33 @@ app.get('/jogador', async (req, res) => {
 
 app.post('/jogador', async (req, res) => {
     const { nome, idade, genero, email, senha } = req.body;
-    const id = Number(customNanoid());
-    const dataCadastro = new Date().toLocaleString();
+    const id = idPersonalizado(nome);
     try {
-        const resultado = await cadastrarJogadorSQL(id, nome, idade, genero, email, senha, dataCadastro);
+        const resultado = await cadastrarJogadorSQL(id, nome, idade, genero, email, senha);
         res.status(201).json({ message: "Jogador cadastrado com sucesso", jogador: resultado });
     } catch (error) {
         console.error("Erro ao cadastrar jogador:", error);
-        res.status(500).json({ error: "Erro ao cadastrar jogador" });
+        res.status(500).json({ error: error });
+    }
+})
+
+app.delete('/jogador/:nome', async (req, res) =>{
+    const { nome } = req.params;
+
+    try {
+        const resultado = await deletarJogadorNOME(nome);
+        res.status(200).json({ message: `Jogador ${nome} deletado com sucesso`});
+    } catch (error) {
+        console.error("Erro ao deletar jogador:", error);
+        res.status(500).json({ error: error });
     }
 })
 
 // PERSONAGENS
 
 app.post('/personagem', async (req, res) => {
-    const {nome, raca, idade, level, classe, genero} = req.body;
-    const id = Number(customNanoid());
+    const { nome, raca, idade, level, classe, genero } = req.body;
+    const id = idPersonalizado(nome);
     try {
         const resultado = await CadastrarPersonagem(id, nome, raca, idade, level, classe, genero);
         const personagem = {
@@ -62,7 +80,7 @@ app.post('/personagem', async (req, res) => {
     catch (error) {
         console.error("Erro ao cadastrar personagem:", error);
         res.status(500).json({ error: "Erro ao cadastrar personagem" });
-    } 
+    }
 })
 
 app.get('/personagem', async (req, res) => {
