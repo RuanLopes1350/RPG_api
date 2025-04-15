@@ -10,8 +10,8 @@ import { deletarJogadorNOME } from '../database/jogadores/deletarJogadorNome';
 const customNanoid = customAlphabet("1234567890", 8)
 
 function idPersonalizado(nome:string){
-    const nomeToID = nome[0].toLowerCase().replace(/\s+/g, '');
-    const id = nanoid(8);
+    const nomeToID = nome.toLowerCase().replace(/\s+/g, '');
+    const id = customNanoid();
     return `${nomeToID}_${id}`;
 }
 
@@ -91,4 +91,10 @@ app.get('/personagem', async (req, res) => {
         console.error("Erro ao listar personagens:", error);
         res.status(500).json({ error: "Erro ao listar personagens" });
     }
+})
+
+app.delete('/personagem/:nome', async (req, res) => {
+    const nome = req.params.nome;
+
+    
 })
